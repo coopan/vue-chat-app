@@ -1,7 +1,7 @@
-import App from './App.vue'
+import Launcher from './Launcher'
 
 const ChatApp = {
-    
+
 }
 
 export default ChatApp

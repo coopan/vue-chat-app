@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+- 一步步进行构造，按照提示进行依赖的安装
+`./node_modules/.bin/eslint --init`
