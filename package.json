@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vue-cli-service build --target lib --name vue-chat-app --formats umd src/index.js"
+    "build": "vue-cli-service build --target lib --name vue-chat-app --formats umd src/index.js",
+    "watch": "npm run build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
     "eslint": "^7.4.0",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "vant": "^2.9.0"
   }
 }

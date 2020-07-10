@@ -1,4 +1,4 @@
-import Launcher from './Launcher'
+import ChatApp from './ChatApp'
 
 const defaultComponentName = 'chat-app-plugin'
 
@@ -43,7 +43,7 @@ const ChatPlugin = {
          */
         this.componentName = options.componentName || defaultComponentName
 
-        Vue.component(this.componentName, Launcher)
+        Vue.component(this.componentName, ChatApp)
     }
 }
 
