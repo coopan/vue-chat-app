@@ -1,8 +1,8 @@
 {
   "name": "vue-chat-app",
-  "version": "1.0.0",
-  "description": "{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "vue-chat-app",
+  "main": "./src/index.js",
   "directories": {
     "doc": "docs"
   },
@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/phpzhi/vue-chat-app.git"
+    "url": "https://github.com/phpzhi/vue-chat-app.git"
   },
   "keywords": [],
-  "author": "PanChaoZhi",
+  "author": "Coco Chao",
   "license": "MIT",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
@@ -27,5 +27,6 @@
     "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "private": false
 }
