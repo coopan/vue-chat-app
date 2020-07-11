@@ -1,4 +1,5 @@
 import ChatApp from './ChatApp'
+import './public/index.js'
 
 const defaultComponentName = 'chat-app-plugin'
 
@@ -44,6 +45,7 @@ const ChatPlugin = {
         this.componentName = options.componentName || defaultComponentName
 
         Vue.component(this.componentName, ChatApp)
+
     }
 }
 

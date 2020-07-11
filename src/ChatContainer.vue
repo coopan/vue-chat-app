@@ -1,43 +1,71 @@
 <template>
-    <div>
-        <NavBar title="标题" left-text="返回" left-arrow>
-            <template #right>
-                <van-icon name="search" size="18"/>
-            </template>
-        </NavBar>
+    <div class="co-chat-container">
+        <Header
+                :title="title"
+                :on-close="onClose"
+                :colors="colors"
+                :disable-user-list-toggle="disableUserListToggle"
+                :show-close-button="showCloseButton"
+        ></Header>
 
+        <Message/>
 
-        <CellGroup>
-            <Field
-                    v-model="value1"
-                    label="文本"
-                    left-icon="smile-o"
-                    right-icon="warning-o"
-                    placeholder="显示图标"
-            />
-        </CellGroup>
+        <Footer/>
     </div>
 </template>
 
 <script>
-    import {NavBar, Field, CellGroup, Notify} from 'vant'
+    import Header from "./Header";
+    import Message from "./Message";
+    import Footer from "./Footer";
 
     export default {
-        components: {NavBar, CellGroup, Field},
+        components: {Header, Message, Footer},
+        props: {
+            title: {
+                type: String,
+                required: true
+            },
+            onClose: {
+                type: Function,
+                required: true
+            },
+            colors: {
+                type: Object,
+                required: true
+            },
+            disableUserListToggle: {
+                type: Boolean,
+                default: false
+            },
+            showCloseButton: {
+                type: Boolean,
+                default: false
+            }
+        },
         data() {
             return {
                 active: 0,
                 value1: '',
             }
         },
-        methods: {
-            onChange(index) {
-                Notify({type: 'primary', message: index})
-            }
-        }
+        methods: {}
     }
 </script>
 
 <style scoped>
-
+    .co-chat-container {
+        width: 370px;
+        /* calc() 此css函数让你在声明css属性值时执行一些计算。函数用一个表达式作为它的参数，表达式的结果作为值*/
+        height: calc(100% - 120px);
+        max-height: 590px;
+        position: fixed;
+        right: 25px;
+        bottom: 100px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background: #ffffff;
+    }
 </style>

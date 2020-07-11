@@ -16,7 +16,7 @@
     "url": "https://gitee.com/phpzhi/vue-chat-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "PanChaoZhi",
   "license": "MIT",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
@@ -24,9 +24,8 @@
     "@vue/cli-service": "^4.4.6",
     "eslint": "^7.4.0",
     "eslint-plugin-vue": "^6.2.2",
+    "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
-  "dependencies": {
-    "vant": "^2.9.0"
-  }
+  "dependencies": {}
 }

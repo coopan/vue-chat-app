@@ -1,28 +1,16 @@
-# demo
+## 使用
+`npm install vue-chap-app`
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
 ```
-npm run serve
+import Chat from '../../dist/vue-chat-app.umd.js'
+Vue.component('Chat')
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+或者直接 cd demo
+`npm run dev`
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
+## 项目搭建
 - 一步步进行构造，按照提示进行依赖的安装
 `./node_modules/.bin/eslint --init`
 
@@ -36,3 +24,5 @@ module.exports = {
 
 ```
 重新 yarn build 成功
+
+## 发布到 npm 流程

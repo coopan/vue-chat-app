@@ -3,8 +3,8 @@
         <chat-app-plugin
                 :show-close-button="true"
                 title="2343423"
-                :on-close="false"
-                :colors="{bgColor: '#4e8cff', textColor: '#ffffff'}"
+                :on-close="onClose"
+                :colors="colors"
                 :disable-user-toggle="false"
         ></chat-app-plugin>
     </div>
@@ -12,9 +12,23 @@
 
 <script>
 
-
     export default {
-        name: "App"
+        name: "App",
+        data() {
+            return {
+                colors: {
+                    header: {
+                        bgColor: '#4e8cff',
+                        textColor: '#ffffff'
+                    }
+                }
+            }
+        },
+        methods: {
+            onClose() {
+                console.log('close chat panel.')
+            }
+        }
     }
 </script>
 
