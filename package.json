@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/phpzhi/vue-chat-app.git"
+    "url": "https://github.com/coopan/vue-chat-app.git"
   },
   "keywords": [],
-  "author": "Coco Chao",
+  "author": "Coopan George",
   "license": "MIT",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
@@ -24,9 +24,13 @@
     "@vue/cli-service": "^4.4.6",
     "eslint": "^7.4.0",
     "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.2",
     "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
-  "dependencies": {},
+  "dependencies": {
+    "escape-goat": "^3.0.0"
+  },
   "private": false
 }

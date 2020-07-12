@@ -8,19 +8,52 @@
                 :show-close-button="showCloseButton"
         ></Header>
 
-        <Message/>
+        <MessageList
+                v-if="!showUserList"
+                :message-list="MessageList"
+                :colors="colors"
+                :participants="participants"
+        >
+            <template v-slot:user-avatar="scopedProps">
+                <slot name="user-avatar"
+                      :user="scopedProps.user"
+                      :message="scopedProps.message"
+                ></slot>
+            </template>
 
-        <Footer/>
+            <!-- 消息内容 -->
+            <template v-slot:text-message-body="scopedProps">
+                <slot name="text-message-body"
+                      :message="scopedProps.message"
+                      :messageText="scopedProps.messageText"
+                      :messageColors="scopedProps.messageColors"
+                      :me="scopedProps.me"
+                ></slot>
+            </template>
+
+            <template v-slot:text-message-toolbox="scopedProps">
+                <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me"></slot>
+            </template>
+
+            <!-- 系统消息 -->
+            <template v-slot:system-message-body="scopedProps">
+                <slot name="system-message-body" :message="scopedProps.message" :me="scopedProps.me"></slot>
+            </template>
+        </MessageList>
+
+        <Footer
+                :on-message-was-sent="onMessageWasSend"
+        />
     </div>
 </template>
 
 <script>
     import Header from "./Header";
-    import Message from "./Message";
     import Footer from "./Footer";
+    import MessageList from "./MessageList";
 
     export default {
-        components: {Header, Message, Footer},
+        components: {MessageList, Header, Footer},
         props: {
             title: {
                 type: String,
@@ -45,13 +78,29 @@
             showCloseButton: {
                 type: Boolean,
                 default: false
-            }
+            },
+            onMessageWasSend: { // 记录已经发送的消息
+                type: Function,
+                required: true
+            },
+            MessageList: { // 消息列表
+                type: Array,
+                default: () => {
+                    return []
+                }
+            },
+            participants:{
+                type: Array,
+                required: true
+            },
         },
         data() {
             return {
-                active: 0,
-                value1: '',
+                showUserList: false
             }
+        },
+        computed: {
+            // 试试不计算能不能直接出来
         },
         methods: {}
     }

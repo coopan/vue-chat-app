@@ -16,9 +16,38 @@
                 :title="title"
                 :on-close="close"
                 :colors="colors"
+                :participants="participants"
                 :disable-user-list-toggle="disableUserListToggle"
                 :show-close-button="showCloseButton"
-        />
+                :on-message-was-send="onMessageWasSend"
+                :message-list="MessageList"
+        >
+            <template v-slot:user-avatar="scopedProps">
+                <slot name="user-avatar"
+                      :user="scopedProps.user"
+                      :message="scopedProps.message"
+                ></slot>
+            </template>
+
+            <!-- 消息内容 -->
+            <template v-slot:text-message-body="scopedProps">
+                <slot name="text-message-body"
+                      :message="scopedProps.message"
+                      :messageText="scopedProps.messageText"
+                      :messageColors="scopedProps.messageColors"
+                      :me="scopedProps.me"
+                ></slot>
+            </template>
+
+            <template v-slot:text-message-toolbox="scopedProps">
+                <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me"></slot>
+            </template>
+
+            <!-- 系统消息 -->
+            <template v-slot:system-message-body="scopedProps">
+                <slot name="system-message-body" :message="scopedProps.message" :me="scopedProps.me"></slot>
+            </template>
+        </ChatContainer>
     </div>
 </template>
 
@@ -69,10 +98,10 @@
                 default: true
             },
             isOpen: {type: Boolean,required: true},
-            open:{type:Function,required:true}
-        },
-        create() {
-            console.log(this.launcher)
+            open:{type:Function,required:true},
+            onMessageWasSend:{type:Function, required:true},
+            MessageList: {type:Array, default: () => []},
+            participants:{type:Array, required:true}
         },
         methods: {
             openAndFocus() {

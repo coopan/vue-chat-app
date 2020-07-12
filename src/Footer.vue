@@ -14,6 +14,8 @@
                  aria-placeholder="please input..."
                  @focus="setInputActive(true)"
                  @blur="setInputActive(false)"
+                 @keydown="handleKey"
+                 @focusUserInput="focusUserInput()"
             ></div>
 
             <div class="co-footer--emoji">
@@ -24,25 +26,70 @@
                 <svg-icon icon-class="file"/>
             </div>
 
-            <div class="co-footer--send-button">
-                <button class="co-footer--send-btn">发送</button>
-            </div>
+            <UserSendButton
+                    @click.native.prevent="_submitText"
+
+            >发送</UserSendButton>
         </form>
     </div>
 </template>
 
 <script>
 
-
+    import UserSendButton from "./components/UserSendButton";
     export default {
+        components: {UserSendButton},
         data() {
             return {
                 inputActive: false
             }
         },
+        props: {
+            onMessageWasSent: {
+                type: Function,
+                required: true
+            }
+        },
         methods:{
             setInputActive(bool) {
                 this.inputActive = bool
+            },
+            /**
+             * 处理回车发送消息
+             * @param event
+             */
+            handleKey(event) {
+                if (event.keyCode === 13 && !event.shiftKey) {
+                    this._submitText(event)
+                }
+            },
+            focusUserInput() {
+
+            },
+            _submitText(event) {
+                const text = this.$refs.userInput.textContent
+                console.log(event)
+                if (text && text.length > 0) {
+                    this._checkSubmitSuccess(
+                        this.onMessageWasSent({
+                            author: 'me',
+                            type: 'text',
+                            data: {text}
+                        })
+                    )
+                }
+            },
+            _checkSubmitSuccess(success) {
+                if (Promise !== undefined) {
+                    Promise.resolve(success).then(function (wasSuccessful) {
+                        console.log(`was successful value: ${wasSuccessful}`)
+                        if (wasSuccessful === undefined || wasSuccessful) {
+                            this.$refs.userInput.innerHTML = ''
+                        }
+                    }.bind(this))
+                } else {
+                    this.$refs.userInput.innerHTML = ''
+                }
             }
         }
     }
@@ -65,7 +112,6 @@
         padding: 10px 15px;
         overflow-x: hidden;
         overflow-y: auto;
-        background-color: #f4efef;
     }
     .co-footer--voice {
         height: 55px;
@@ -85,16 +131,5 @@
         display: flex;
         align-items: center;
     }
-    .co-footer--send-button {
-        height: 55px;
-        width: 40px;
-        display: flex;
-        align-items: center;
-    }
-    .co-footer--send-btn {
-        height: 30px;
-        width: 50px;
-        border-radius: 5px;
-        font-size: 10px;
-    }
+
 </style>
