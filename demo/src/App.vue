@@ -12,6 +12,7 @@
                 :on-message-was-send="onMessageWasSend"
                 :message-list="messageListCache"
                 :participants="participants"
+                :message-new-count="messageNewCount"
         >
 
             <!-- 消息内容 -->
@@ -20,7 +21,7 @@
             </template>
 
             <template v-slot:text-message-toolbox="scopedProps">
-                <button>{{scopedProps.message.data.text}}</button>
+                <button>{{scopedProps.message.data.id}}</button>
             </template>
 
             <!-- 系统消息 -->
@@ -28,14 +29,19 @@
                 [System]:{{ scopedProps.message.data.text }}
             </template>
         </chat-app-plugin>
+
+        <test-area
+         @message="sendMessage" :on-typing="handleTyping"></test-area>
     </div>
 </template>
 
 <script>
+    import TestArea from "./TestArea";
     import availableThemeColors from './colors'
     import chatProfiles from "./chatProfiles";
     export default {
         name: "App",
+        components: {TestArea},
         data() {
             return {
                 id: 1,
@@ -44,10 +50,14 @@
                 isChatOpen: true,
                 availableThemeColors,
                 messageListCache: [],
+                messageNewCount: 0,
             }
         },
         created() {
             this.setThemeColor('blue')
+        },
+        computed: {
+
         },
         methods: {
             closeChat() {
@@ -55,6 +65,7 @@
             },
             openChat() {
                 this.isChatOpen = true
+                this.messageNewCount = 0
             },
             // 设置主题颜色
             setThemeColor(color) {
@@ -67,6 +78,21 @@
             onMessageWasSend(message) {
                 console.log(`recording sent messages: ${JSON.stringify(message, null, 1)}`)
                 this.messageListCache.push(Object.assign({}, message, {id: ++this.id}))
+            },
+            sendMessage(text) {
+                //console.log(`send message text: ${text}`)
+                if (text.length > 0) {
+                    this.messageNewCount = this.isChatOpen ? this.messageNewCount : this.messageNewCount + 1
+                    this.onMessageWasSend({
+                        author: 'support',
+                        type: 'text',
+                        id: Math.random(),
+                        data: {text}
+                    })
+                }
+            },
+            handleTyping(text) {
+                console.log(text)
             }
         }
     }
