@@ -6,6 +6,10 @@
          :style="{backgroundColor: colors.launcher.bgColor}"
          @click.prevent="isOpen ? close() : openAndFocus()"
     >
+        <div v-if="messageNewCount > 0 && !isOpen" class="co-chat-message-count">
+            {{ messageNewCount }}
+        </div>
+
         <img v-if="isOpen" class="co-closed-icon" src="./public/img/close-icon.png" alt="关闭聊天窗口"/>
 
         <img v-else class="co-open-icon" src="./public/img/message-solid.png" alt="打开聊天窗口"/>
@@ -101,7 +105,8 @@
             open:{type:Function,required:true},
             onMessageWasSend:{type:Function, required:true},
             MessageList: {type:Array, default: () => []},
-            participants:{type:Array, required:true}
+            participants:{type:Array, required:true},
+            messageNewCount: {type: Number,default: () => 0}
         },
         methods: {
             openAndFocus() {
@@ -136,6 +141,23 @@
     }
     .co-chat-app:hover {
         box-shadow: 0 0 27px 2px rgba(0,0,0,0.2);
+    }
+    .co-chat-message-count {
+        position: absolute;
+        top: -3px;
+        left: 41px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        background: #ff4646;
+        color: white;
+        text-align: center;
+        margin: auto;
+        font-size: 12px;
+        font-weight: 500;
     }
     /* 悬浮图标的位置 */
     .co-chat-app .co-open-icon,
